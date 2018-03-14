@@ -1,0 +1,29 @@
+﻿using SimpleBlog.Controllers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+
+namespace SimpleBlog
+{
+    public class RouteConfig
+    {
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            var Namespaces = new[] { typeof(PostsController).Namespace };
+            //Multiple matching Type Error Exception hatası çözümü ,alt kısımda Maproute kısmında namespace parametre olarak verilir.
+
+            //routes.MapRoute(name = Unique name, url = the url address of web page, defaults = common in form of anymous object);
+
+
+            routes.MapRoute("Home","", new { controller = "Posts", action = "Index" },Namespaces);
+
+            routes.MapRoute("Login", "login", new { controller = "Auth", action = "login" });
+            routes.MapRoute("List", "list", new { controller = "Posts", action = "list" },Namespaces);
+        }
+    }
+}
